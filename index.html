@@ -3,123 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple URL Fetcher</title>
+    <title>SkidScrape v0.1</title>
+    <link rel="icon" href="https://charlieisinsane.neocities.org/Logo.jpeg" type="image/jpeg"> <!-- Favicon -->
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            background-color: #121212; /* Dark background */
+            color: #ffffff; /* Light text color */
+            overflow: hidden; /* Prevent scrolling */
+            transition: background-color 0.3s ease;
         }
-
-        h1 {
-            color: #333;
-        }
-
         .container {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 400px;
+            max-width: 1280px;
+            margin: auto;
             text-align: center;
         }
-
         input[type="text"] {
-            width: calc(100% - 20px);
+            width: 300px;
             padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1e1e1e; /* Dark input background */
+            color: #ffffff; /* Light input text */
+            transition: background-color 0.3s ease;
         }
-
+        input[type="text"]:focus {
+            background-color: #2e2e2e; /* Darker input on focus */
+            outline: none;
+        }
         button {
             padding: 10px 15px;
-            background-color: #007BFF;
-            color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
+            background-color: #6200ea; /* Primary button color */
+            color: #ffffff; /* Button text color */
             cursor: pointer;
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s ease;
+            margin: 5px; /* Add some margin between buttons */
         }
-
         button:hover {
-            background-color: #0056b3;
+            background-color: #3700b3; /* Darker button on hover */
         }
-
-        h2 {
+        svg {
             margin-top: 20px;
-            color: #333;
+            border: 1px solid #444; /* Darker border */
+            width: 100%;
+            height: 600px; /* Set a default height */
+            border-radius: 5px; /* Rounded corners */
         }
-
-        pre {
-            background: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 10px;
-            overflow: auto;
-            max-height: 300px;
-            text-align: left;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-
-        .spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            margin-left: 10px;
+        footer {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffffff; /* Light text color */
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>DynBlock Proxy</h1>
-        <input type="text" id="url" placeholder="Enter URL to fetch">
-        <button id="fetchBtn">
-            Fetch
-            <svg class="spinner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                <circle cx="25" cy="25" r="20" stroke="white" stroke-width="5" fill="none" />
-                <path fill="white" d="M25 5a20 20 0 0 1 0 40 20 20 0 0 1 0-40z">
-                    <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite" />
-                </path>
-            </svg>
-        </button>
-        <h2>Response:</h2>
-        <pre id="response"></pre>
+        <h1>SkidScrape v0.1</h1>
+        <input type="text" id="urlInput" placeholder="Enter a URL (e.g., https://kour.io)">
+        <button onclick="loadUrl()">Load URL</button>
+        <button onclick="goFullscreen()">Go Fullscreen</button>
+        <button onclick="loadEruda()">Load Eruda</button>
+        
+        <svg id="urlEmbed" xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+            <title>Embedded URL</title>
+            <foreignObject x="0" y="0" width="1280" height="720">
+                <embed id="urlEmbedContent" xmlns="http://www.w3.org/1999/xhtml" src="" type="text/html" width="1260" height="700" />
+            </foreignObject>
+        </svg>
     </div>
 
-    <script>
-        document.getElementById('fetchBtn').addEventListener('click', function() {
-            const url = document.getElementById('url').value;
-            const spinner = document.querySelector('.spinner');
-            spinner.style.display = 'inline-block'; // Show spinner
+    <footer>
+        By Charlieis1nsan3
+    </footer>
 
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById('response').textContent = data;
-                })
-                .catch(error => {
-                    document.getElementById('response').textContent = 'Error: ' + error.message;
-                })
-                .finally(() => {
-                    spinner.style.display = 'none'; // Hide spinner
-                });
-        });
+    <script>
+        function loadUrl() {
+            const urlInput = document.getElementById('urlInput').value;
+            const urlEmbedContent = document.getElementById('urlEmbedContent');
+
+            // Validate the URL
+            if (urlInput) {
+                // Set the embed source to the entered URL
+                urlEmbedContent.src = urlInput;
+            } else {
+                alert("Please enter a valid URL.");
+            }
+        }
+
+        function goFullscreen() {
+            const svgElement = document.getElementById('urlEmbed');
+            if (svgElement.requestFullscreen) {
+                svgElement.requestFullscreen();
+            } else if (svgElement.mozRequestFullScreen) { // Firefox
+                svgElement.mozRequestFullScreen();
+            } else if (svgElement.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                svgElement.webkitRequestFullscreen();
+            } else if (svgElement.msRequestFullscreen) { // IE/Edge
+                svgElement.msRequestFullscreen();
+            }
+        }
+
+        function loadEruda() {
+            var script = document.createElement('script');
+            script.src = "https://cdn.jsdelivr.net/npm/eruda";
+            document.body.appendChild(script);
+            script.onload = function() {
+                eruda.init();
+            };
+        }
     </script>
 </body>
 </html>
