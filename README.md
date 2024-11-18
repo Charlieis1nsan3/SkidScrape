@@ -1,4 +1,3 @@
-this is a simple web proxy I hope to make this really popular and make people have fun :)
-
-
-*WARNING*  If your school has network blocking most likely this is not going to work sorry bud.
+# Skid Scrape
+This is a smi-functional unblocker which allows user to have a feel of a proxy but not. But it does unblock stuff like https//kour.io https://krunker.io https://1v1.lol 
+most of your main games.
